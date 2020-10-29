@@ -1,0 +1,67 @@
+<script language="javascript" type="text/javascript">
+function randomString() {
+  var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+  var string_length = 8;
+  var randomstring = '';
+  for (var i=0; i<string_length; i++) {
+    var rnum = Math.floor(Math.random() * chars.length);
+    randomstring += chars.substring(rnum,rnum+1);
+  }
+  document.randform.identifier.value = randomstring;
+}
+</script>
+
+
+<h3> ご協力ありがとうございました </h3> 
+
+以上で実験は終了となります。大変ありがとうございました。報酬を受け取るためには、以下の3つの作業を行なってください: <br> <br>
+<ol>
+<li> あなたの<b>クラウドワーカー名</b>を入力してください.
+<br>
+<table>
+<tr>
+  <td colspan="1"> クラウドワーカー名:
+</td>
+</tr>
+<tr>
+  <td colspan="1">
+    <textarea name="worker_id" rows="1" cols="20" class="obligatory"></textarea>
+  </td>
+</tr>
+</table>
+</li>
+
+<br>
+<br>
+
+<li> 下のボタンを押して<b>参加者ID</b>を生成してください。このIDはCrowdWorksの仕事ページの該当欄に入力してください。
+<br>
+<table>
+<tr>
+  <td colspan="1">
+      参加者ID:
+  </td>
+</tr>
+<tr>
+  <td>
+    <form name="randform">
+      <input type="button" value="参加者IDを生成する" onClick="randomString();">&nbsp;
+      <input type="text" name="identifier" value="" class="obligatory">
+    </form>
+  </td>
+</tr>
+</table>
+</li>
+
+<br>
+<br>
+
+<li> 次のページに進んで <b>実験コードを確認してください</b>。 このコードもCrowdWorksの仕事のページの該当欄に入力してください。<br>
+
+
+
+<br>
+
+
+<u>下のボタンを押して実験データを送信し、実験コードを確認してください。</u> <br>
+録音データをサーバーに送信するのに数分かかる場合があります。データがアップロードされたら、実験コードが表示されます。報酬を受け取るには、このコードをCrowdWorksのページに入力してください。
