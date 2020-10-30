@@ -629,6 +629,7 @@ SendResults("send_results");
 
 newTrial("exit",
     newHtml("exit2","exit2.html")
+        .print()
     ,
     newTimer(1)
         .wait()
