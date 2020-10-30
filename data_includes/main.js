@@ -1,5 +1,5 @@
 PennController.ResetPrefix(null);
-PennController.DebugOff(); Delete the slashes before running the experiment
+PennController.DebugOff();
 
 
 Sequence("consent_form","initiate-recorder", "recording_test", "introduction",
