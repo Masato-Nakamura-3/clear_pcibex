@@ -416,6 +416,9 @@ newTrial( "practice_long_exit",
     newText("以上で練習は終わりです。スペースキーを押すと実験の前半が始まりますので、準備ができたら始めてください。")
         .print()
     ,
+    newText("前半が終わったところで一度休憩を取っていただきますが、 「スペースキーを押して次に進んでください」と表示されている間であれば、いつでも短い休憩を取っていただいて構いません。")
+        .print()
+    ,
     newKey(" ")
         .wait()
     ).setOption("hideProgressBar", true);
