@@ -424,7 +424,7 @@ newTrial( "practice_long_exit",
 
 // Body of the long condition
 Template(
-    GetTable("myTable_test.csv")
+    GetTable("myTable.csv")
         .filter( row => row.limit == "long")
     , row =>
     newTrial("exp_long",
@@ -557,7 +557,7 @@ newTrial( "practice_short_exit",
 
 //body of the short trials
 Template(
-    GetTable("myTable_test.csv")
+    GetTable("myTable.csv")
         .filter( row => row.limit == "short")
     , row =>
     newTrial("exp_short",
