@@ -356,13 +356,13 @@ newTrial("bad_example_3",
     ).setOption("hideProgressBar", true);
 
 newTrial("final_example_intro",
-    newText("実験の前半に関する説明は以上です。<br>最後にもう一度正しい例を見ていただいたあとに、練習を始めます。")
+    newText("実験の前半に関する説明は以上です。<br>最後にもう一度正しい例を見ていただいたあとに、練習を始めます。<br>")
         .print()
     ,
     newButton("良い例をみる")
         .print()
         .wait()
-    )
+    ).setOption("hideProgressBar", true)
 
 
 newTrial( "practice_long_intro",
@@ -424,7 +424,7 @@ Template(
 )
 
 newTrial( "practice_long_exit",
-    newHtml("long_ext.html")
+    newHtml("long_exit.html")
         .print()
     ,
     newKey(" ")
