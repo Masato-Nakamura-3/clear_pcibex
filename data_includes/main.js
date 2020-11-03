@@ -1,10 +1,11 @@
 PennController.ResetPrefix(null);
-PennController.DebugOff();
+//PennController.DebugOff();
 
 
 Sequence("consent_form","initiate-recorder", "recording_test", "introduction",
     "introduction_long_1", "good_example","bad_example_1", "introduction_long_2",
-    "bad_example_2", "bad_example_3", "practice_long_intro", "practice_long",
+    "bad_example_2", "bad_example_3","practice_finalexample", "good_example",
+    "practice_long_intro", "practice_long",
     "practice_long_exit", randomize("exp_long"), "break", "introduction_short",
     "practice_short", "practice_short_exit", randomize("exp_short"),
     "exit_form1", "send_results", "exit");
@@ -354,8 +355,14 @@ newTrial("bad_example_3",
         .wait()
     ).setOption("hideProgressBar", true);
 
+newTrial("practice_finalexample",
+    newText("実験の前半に関する説明は以上です。<br>最後にもう一度正しい例を見ていただいたあとに、練習を始めます。")
+        .print()
+    )
+
+
 newTrial( "practice_long_intro",
-    newText("実験の前半に関する説明は以上です。続いて練習を行っていただきます。なお、練習では音声は録音されません。<br><br>")
+    newText("続いて練習を行っていただきます。なお、練習では音声は録音されません。<br><br>")
         .print()
     ,
     newButton("練習を始める")
@@ -413,10 +420,7 @@ Template(
 )
 
 newTrial( "practice_long_exit",
-    newText("以上で練習は終わりです。スペースキーを押すと実験の前半が始まりますので、準備ができたら始めてください。")
-        .print()
-    ,
-    newText("前半が終わったところで一度休憩を取っていただきますが、 「スペースキーを押して次に進んでください」と表示されている間であれば、いつでも短い休憩を取っていただいて構いません。")
+    newHtml("long_ext.html")
         .print()
     ,
     newKey(" ")
