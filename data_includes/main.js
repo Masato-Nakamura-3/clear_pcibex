@@ -4,7 +4,7 @@ PennController.ResetPrefix(null);
 
 Sequence("consent_form","initiate-recorder", "recording_test", "introduction",
     "introduction_long_1", "good_example","bad_example_1", "introduction_long_2",
-    "bad_example_2", "bad_example_3","practice_finalexample", "good_example",
+    "bad_example_2", "bad_example_3","final_example_intro", "good_example",
     "practice_long_intro", "practice_long",
     "practice_long_exit", randomize("exp_long"), "break", "introduction_short",
     "practice_short", "practice_short_exit", randomize("exp_short"),
@@ -355,9 +355,13 @@ newTrial("bad_example_3",
         .wait()
     ).setOption("hideProgressBar", true);
 
-newTrial("practice_finalexample",
+newTrial("final_example_intro",
     newText("実験の前半に関する説明は以上です。<br>最後にもう一度正しい例を見ていただいたあとに、練習を始めます。")
         .print()
+    ,
+    newButton("良い例をみる")
+        .print()
+        .wait()
     )
 
 
