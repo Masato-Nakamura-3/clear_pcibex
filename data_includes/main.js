@@ -454,7 +454,7 @@ Template(
             .css({"font-size":"40", "color":"black","position":"absolute", "top":"40%"})
             .print()
         ,
-        newMediaRecorder(row.filename+subject_id,"audio")
+        newMediaRecorder(row.filename+"_"+subject_id,"audio")
             .record()
         ,
         newTimer(1600)
@@ -477,7 +477,7 @@ Template(
             .start()
             .wait()
         ,
-        getMediaRecorder(row.filename+subject_id)
+        getMediaRecorder(row.filename+"_"+subject_id)
             .stop()
 
         ,
@@ -587,7 +587,7 @@ Template(
             .css({"font-size":"40", "color":"red","position":"absolute", "top":"40%"})
             .print()
         ,
-        newMediaRecorder(row.filename+subject_id,"audio")
+        newMediaRecorder(row.filename+"_"+subject_id,"audio")
             .record()
         ,
         newTimer(1200)
@@ -601,7 +601,7 @@ Template(
             .start()
             .wait()
         ,
-        getMediaRecorder(row.filename+subject_id)
+        getMediaRecorder(row.filename+"_"+subject_id)
             .stop()
         ,
         newText("スペースキーを押して次に進んでください。")
