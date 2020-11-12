@@ -1,7 +1,8 @@
 PennController.ResetPrefix(null);
-PennController.DebugOff();
+PennController.DebugOff();//Comment this out when you are testing the script
 
-
+//Set the Sequence
+// Make sure you include InitiateRecorder and SendResults
 Sequence("consent_form","initiate-recorder", "recording_test", "introduction",
     "introduction_long_1", "good_example","bad_example_1", "introduction_long_2",
     "bad_example_2", "bad_example_3","final_example_intro", "good_example",
@@ -10,20 +11,22 @@ Sequence("consent_form","initiate-recorder", "recording_test", "introduction",
     "practice_short", "practice_short_exit", randomize("exp_short"),
     "exit_form1", "send_results", "exit");
 
+//Edit the consent button for audio recording
 let replaceConsentMic = ()=>{
         let consentLink = $(".PennController-PennController a.Message-continue-link");
         if (consentLink.length > 0 && consentLink[0].innerHTML.match(/^By clicking this link I understand that I grant this experiment's script access to my recording device/))
-            consentLink.html("同意する");
+            consentLink.html("同意する"); // Edit the quoted text
         else
             window.requestAnimationFrame( replaceConsentMic );
 };
 window.requestAnimationFrame( replaceConsentMic );
 
+//Edit the uploading error message
 const replaceUploadingErrorMessage = ()=>{
     const uploadingErrorMessage = $(".PennController-PennController p:nth-child(2)");
     if (uploadingErrorMessage.length > 0 && uploadingErrorMessage[0].innerHTML.match(/^There was an error uploading the recordings:/))
-        uploadingErrorMessage.html("サーバーにデータをアップロードする際に問題が発生しました。<br>下のリンクから録音データをダウンロードしてください。ダウンロードしたファイルは、解凍せずにファイル名を'[クラウドワーカー名]_[参加者ID]'とした上で、https://ter.ps/clearuploadにアップロードしてください。(例:田中太郎_hd8kT37g)")
-            .siblings(".Message-continue-link").html("録音データをダウンロードする");
+        uploadingErrorMessage.html("サーバーにデータをアップロードする際に問題が発生しました。<br>下のリンクから録音データをダウンロードしてください。ダウンロードしたファイルは、解凍せずにファイル名を'[クラウドワーカー名]_[参加者ID]'とした上で、https://ter.ps/clearuploadにアップロードしてください。(例:田中太郎_hd8kT37g)")//The text for the error message
+            .siblings(".Message-continue-link").html("録音データをダウンロードする");//The text for the link to the recordings
     else
         window.requestAnimationFrame( replaceUploadingErrorMessage );
 };
@@ -31,7 +34,8 @@ replaceUploadingErrorMessage();
 
 
 
-
+// Define a function to generate subject IDs which is a squence of 4 letters
+// The ID is used to name the recording files
 function getRandomStr(){
     const LENGTH = 4
     const SOURCE = "abcdefghijklmnopqrstuvwxyz"
@@ -44,8 +48,10 @@ function getRandomStr(){
   return result
 }
 
+// Generate a subject ID
 const subject_id = getRandomStr()
 
+// Consent form
 newTrial("consent_form",
     newHtml("consent", "consent.html")
         .settings.checkboxWarning("Required")
@@ -61,12 +67,20 @@ newTrial("consent_form",
             .failure( getHtml("consent").warn() ))
 ).setOption("hideProgressBar", true);
 
+
+// Initiate recorder for later use
+// This part also inserts a consent for recording
+// The consent link can be edited by the script above (replaceConsentMic)
+// The URL should be referring to the php file in your directory in your server
+// See the LSC server instruction for the detail
 InitiateRecorder("https://hjpatt-136.umd.edu/Web_Experiments/Phillips/Masato/PCIbex.php",
     "この実験プログラムは音声を録音し、記録します。<strong>このプログラムが録音機器を使用している間は、ページ上部に「Recording」と表示されます。</strong>この実験プログラムが実験参加者様の録音機器にアクセスすることに同意していただける場合には、下の「同意する」をクリックしてください。"
     )
     .setOption("hideProgressBar", true)
     .label("initiate-recorder");
 
+// Recording test
+// Participants record their voice and hear it to make sure the recorder is working
 newTrial("recording_test",
     newText("この実験では録音を行います。実験を始める前に、録音のテストをしてください。")
         .bold()
@@ -101,7 +115,8 @@ newTrial("recording_test",
 
 
 
-
+// Intro
+// The content is in introduction.html
 newTrial("introduction",
     newHtml("introduction.html")
         .print()
@@ -113,7 +128,7 @@ newTrial("introduction",
 
 //////////////////
 
-
+// Intro 2
 newTrial("introduction_long_1",
     newHtml("long_1.html")
         .print()
@@ -123,6 +138,8 @@ newTrial("introduction_long_1",
         .wait()
     ).setOption("hideProgressBar", true);
 
+
+// Examples for participants
 newTrial("good_example",
     newText("example","良い例")
         .css({"font-size":"20","border": "solid 1px black","position":"absolute", "left":"30%","top":"20%"})
@@ -237,6 +254,8 @@ newTrial("bad_example_1",
         .wait()
     ).setOption("hideProgressBar", true);
 
+
+// Intro 3
 newTrial("introduction_long_2",
     newHtml("long_2.html")
         .print()
@@ -355,6 +374,7 @@ newTrial("bad_example_3",
         .wait()
     ).setOption("hideProgressBar", true);
 
+// Show the good example for one last time
 newTrial("final_example_intro",
     newText("実験の前半に関する説明は以上です。<br>最後にもう一度正しい例を見ていただいたあとに、練習を始めます。<br>")
         .print()
@@ -373,6 +393,7 @@ newTrial( "practice_long_intro",
         .print()
         .wait()
     ).setOption("hideProgressBar", true);
+
 
 Template(
     GetTable("practice.csv")
@@ -495,7 +516,8 @@ Template(
         .setOption("hideProgressBar", true)
     )
 
-//////
+
+// Break between the blocks
 newTrial("break" ,
     newText("以上で実験の前半が終了しました。続いて後半の説明に入りますが、後半に進む前に短い休憩を取って頂いても構いません。<br><br>")
         .print()
@@ -504,7 +526,7 @@ newTrial("break" ,
     ).setOption("hideProgressBar", true);
 
 
-////
+// Intro to the second block
 newTrial("introduction_short",
     newHtml("short_1.html")
         .print()
@@ -515,7 +537,7 @@ newTrial("introduction_short",
     ).setOption("hideProgressBar", true);
 
 
-
+// Practice session for the second block
 Template(
     GetTable("practice.csv")
         .filter( row => row.limit == "short")
@@ -565,6 +587,7 @@ newTrial( "practice_short_exit",
     newKey(" ")
         .wait()
     ).setOption("hideProgressBar", true);
+
 
 //body of the short trials
 Template(
@@ -621,9 +644,10 @@ Template(
 
 
 
-//////
 
 
+// Exit form to collect worker data
+// See exit.html for the detail
 newTrial("exit_form1",
     newFunction( ()=>$("body").removeClass('standout') ).call(),
     newHtml("exit", "exit.html")
@@ -636,8 +660,10 @@ newTrial("exit_form1",
 
 ).setOption("hideProgressBar", true);
 
+// Send the result to the server
 SendResults("send_results");
 
+// Exit
 newTrial("exit",
     newHtml("exit2","exit2.html")
         .print()
