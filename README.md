@@ -6,6 +6,7 @@ This is a tentative Read Me file for an online PCIbex experiment with audio reco
 
 - **"chunk includes" directory** contains the relevant files such as html files for instructions or audio files for examples to present
 
+The stimuli set is replaced with a dummy version since I was not the one who created the one I used in my study.
 
 
 If you are using the LSC server, see the instructions to it too.
