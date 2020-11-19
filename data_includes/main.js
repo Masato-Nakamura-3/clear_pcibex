@@ -8,6 +8,7 @@ Sequence("consent_form","initiate-recorder", "recording_test", "introduction",
     "bad_example_2", "bad_example_3","final_example_intro", "good_example",
     "practice_long_intro", "practice_long",
     "practice_long_exit", randomize("exp_long"), "break", "introduction_short",
+    "example_short","practice_short_intro",
     "practice_short", "practice_short_exit", randomize("exp_short"),
     "exit_form1", "send_results", "exit");
 
@@ -25,7 +26,7 @@ window.requestAnimationFrame( replaceConsentMic );
 const replaceUploadingErrorMessage = ()=>{
     const uploadingErrorMessage = $(".PennController-PennController p:nth-child(2)");
     if (uploadingErrorMessage.length > 0 && uploadingErrorMessage[0].innerHTML.match(/^There was an error uploading the recordings:/))
-        uploadingErrorMessage.html("サーバーにデータをアップロードする際に問題が発生しました。<br>下のリンクから録音データをダウンロードしてください。ダウンロードしたファイルは、解凍せずにファイル名を'[クラウドワーカー名]_[参加者ID]'とした上で、https://ter.ps/clearuploadにアップロードしてください。(例:田中太郎_hd8kT37g)")//The text for the error message
+        uploadingErrorMessage.html("サーバーにデータをアップロードする際に問題が発生しました。<br>下のリンクから録音データをダウンロードしてください。ダウンロードしたファイルは、解凍せずにファイル名を'[クラウドワーカー名]_[参加者ID]'とした上で、https://ter.ps/clearupload0にアップロードしてください。(例:田中太郎_hd8kT37g)")//The text for the error message
             .siblings(".Message-continue-link").html("録音データをダウンロードする");//The text for the link to the recordings
     else
         window.requestAnimationFrame( replaceUploadingErrorMessage );
@@ -198,7 +199,7 @@ newTrial("good_example",
     ).setOption("hideProgressBar", true);
 
 newTrial("bad_example_1",
-    newText("example","悪い例")
+    newText("example","悪い例1 - 単語が消えてから答えている")
         .css({"font-size":"20","border": "solid 1px black","position":"absolute", "left":"30%","top":"20%"})
         .print("left at 0em")
     ,
@@ -267,7 +268,7 @@ newTrial("introduction_long_2",
 
 //
 newTrial("bad_example_2",
-    newText("example","悪い例")
+    newText("example","悪い例2 - 回答以外の音声を発している")
         .css({"font-size":"20","border": "solid 1px black","position":"absolute", "left":"30%","top":"20%"})
         .print("left at 0em")
     ,
@@ -322,7 +323,7 @@ newTrial("bad_example_2",
 //
 
 newTrial("bad_example_3",
-    newText("example","悪い例")
+    newText("example","悪い例3 - 途中で言い直している")
         .css({"font-size":"20","border": "solid 1px black","position":"absolute", "left":"30%","top":"20%"})
         .print("left at 0em")
     ,
@@ -529,6 +530,65 @@ newTrial("break" ,
 // Intro to the second block
 newTrial("introduction_short",
     newHtml("short_1.html")
+        .print()
+    ,
+    newButton("例を見る")
+        .print()
+        .wait()
+    ).setOption("hideProgressBar", true);
+
+// Examples for the short blocks
+Template(
+    GetTable("examples.csv")
+        .filter( eg => eg.limit == "short")
+    , eg =>
+    newTrial("example_short",
+        newText("example",eg.exampletext)
+            .css({"font-size":"20","border": "solid 1px black","position":"absolute", "left":"30%","top":"20%"})
+            .print("left at 0em")
+        ,
+        newText("cross","+")
+            .css({"font-size":"40","position":"absolute", "top":"40%"})
+            .print()
+        ,
+        newTimer(800)
+            .start()
+            .wait()
+        ,
+        getText("cross")
+            .remove()
+        ,
+        newText("stimulus", eg.context)
+            .css({"font-size":"40", "color":"black","position":"absolute", "top":"40%"})
+            .css({"color":"red"})
+            .print()
+        ,
+        newAudio("sample",eg.audiofile)
+            .play()
+        ,
+        newTimer(1200)
+            .start()
+            .wait()
+        ,
+        getText("stimulus")
+            .remove()
+        ,
+        newTimer(2000)
+            .start()
+            .wait()
+        ,
+        newText("スペースキーを押して次に進んでください。")
+            .css({"position":"absolute", "top":"35%"})
+            .print()
+        ,
+        newKey(" ")
+            .wait()
+    ).setOption("hideProgressBar", true)
+)
+
+
+newTrial( "practice_short_intro",
+    newText("続いて練習を行っていただきます。練習では音声は録音されません。<br><br>")
         .print()
     ,
     newButton("練習を始める")
