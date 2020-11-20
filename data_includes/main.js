@@ -4,7 +4,7 @@ PennController.DebugOff();//Comment this out when you are testing the script
 //Set the Sequence
 // Make sure you include InitiateRecorder and SendResults
 Sequence("consent_form","initiate-recorder", "recording_test", "introduction",
-    "introduction_long_1", "good_example","bad_example_1", "introduction_long_2",
+    "introduction_long_1", "good_example","bad_example_1", "bad_example_11", "introduction_long_2",
     "bad_example_2", "bad_example_3","final_example_intro", "good_example",
     "practice_long_intro", "practice_long",
     "practice_long_exit", randomize("exp_long"), "break", "introduction_short",
@@ -143,12 +143,12 @@ newTrial("introduction_long_1",
 // Examples for participants
 newTrial("good_example",
     newText("example","良い例")
-        .css({"font-size":"20","border": "solid 1px black","position":"absolute", "left":"30%","top":"20%"})
-        .print("left at 0em")
+        .css({"font-size":"20","border": "solid 1px black"})
+        .print("left at 10vw","top at 10vh")
     ,
     newText("cross","+")
-        .css({"font-size":"40","position":"absolute", "top":"40%"})
-        .print()
+        .css({"font-size":"40"})
+        .print("center at 50vw", "middle at 40vh")
     ,
     newTimer(800)
         .start()
@@ -158,8 +158,8 @@ newTrial("good_example",
         .remove()
     ,
     newText("stimulus", "会社員が")
-        .css({"font-size":"40", "color":"black","position":"absolute", "top":"40%"})
-        .print()
+        .css({"font-size":"40", "color":"black"})
+        .print("center at 50vw", "middle at 40vh")
     ,
     newTimer(1600)
         .start()
@@ -191,21 +191,20 @@ newTrial("good_example",
         .remove()
     ,
     newText("スペースキーを押して次に進んでください。")
-        .css({"position":"absolute", "top":"35%"})
-        .print()
+        .print("center at 50vw", "middle at 40vh")
     ,
     newKey(" ")
         .wait()
     ).setOption("hideProgressBar", true);
 
 newTrial("bad_example_1",
-    newText("example","悪い例1 - 単語が消えてから答えている")
-        .css({"font-size":"20","border": "solid 1px black","position":"absolute", "left":"30%","top":"20%"})
-        .print("left at 0em")
+    newText("example","悪い例1 - 単語が赤くなる前に答えている")
+        .css({"font-size":"20","border": "solid 1px black"})
+        .print("left at 10vw","top at 10vh")
     ,
     newText("cross","+")
-        .css({"font-size":"40","position":"absolute", "top":"40%"})
-        .print()
+        .css({"font-size":"40"})
+        .print("center at 50vw", "middle at 40vh")
     ,
     newTimer(800)
         .start()
@@ -215,8 +214,8 @@ newTrial("bad_example_1",
         .remove()
     ,
     newText("stimulus", "会社員が")
-        .css({"font-size":"40", "color":"black","position":"absolute", "top":"40%"})
-        .print()
+        .css({"font-size":"40", "color":"black"})
+        .print("center at 50vw", "middle at 40vh")
     ,
     newTimer(600)
         .start()
@@ -248,13 +247,64 @@ newTrial("bad_example_1",
         .remove()
     ,
     newText("スペースキーを押して次に進んでください。")
-        .css({"position":"absolute", "top":"35%"})
-        .print()
+        .print("center at 50vw", "middle at 40vh")
     ,
     newKey(" ")
         .wait()
     ).setOption("hideProgressBar", true);
 
+//
+newTrial("bad_example_11",
+    newText("example","悪い例2 - 単語が消えたあとに答えている")
+        .css({"font-size":"20","border": "solid 1px black"})
+        .print("left at 10vw","top at 10vh")
+    ,
+    newText("cross","+")
+        .css({"font-size":"40"})
+        .print("center at 50vw", "middle at 40vh")
+    ,
+    newTimer(800)
+        .start()
+        .wait()
+    ,
+    getText("cross")
+        .remove()
+    ,
+    newText("stimulus", "会社員が")
+        .css({"font-size":"40", "color":"black"})
+        .print("center at 50vw", "middle at 40vh")
+    ,
+    newTimer(1600)
+        .start()
+        .wait()
+    ,
+    getText("stimulus")
+        .css({"color":"red"})
+        .refresh()
+    ,
+    newTimer(1200)
+        .start()
+        .wait()
+    ,
+    getText("stimulus")
+        .remove()
+    ,
+    newAudio("bad","kitaku_0.m4a")
+        .play()
+    ,
+    newTimer(2000)
+        .start()
+        .wait()
+    ,
+    getText("example")
+        .remove()
+    ,
+    newText("スペースキーを押して次に進んでください。")
+        .print("center at 50vw", "middle at 40vh")
+    ,
+    newKey(" ")
+        .wait()
+    ).setOption("hideProgressBar", true);
 
 // Intro 3
 newTrial("introduction_long_2",
@@ -269,12 +319,12 @@ newTrial("introduction_long_2",
 //
 newTrial("bad_example_2",
     newText("example","悪い例2 - 回答以外の音声を発している")
-        .css({"font-size":"20","border": "solid 1px black","position":"absolute", "left":"30%","top":"20%"})
-        .print("left at 0em")
+        .css({"font-size":"20","border": "solid 1px black"})
+        .print("left at 10vw","top at 10vh")
     ,
     newText("cross","+")
-        .css({"font-size":"40","position":"absolute", "top":"40%"})
-        .print()
+        .css({"font-size":"40"})
+        .print("center at 50vw", "middle at 40vh")
     ,
     newTimer(800)
         .start()
@@ -284,8 +334,8 @@ newTrial("bad_example_2",
         .remove()
     ,
     newText("stimulus", "会社員が")
-        .css({"font-size":"40", "color":"black","position":"absolute", "top":"40%"})
-        .print()
+        .css({"font-size":"40", "color":"black"})
+        .print("center at 50vw", "middle at 40vh")
     ,
     newTimer(1600)
         .start()
@@ -313,8 +363,7 @@ newTrial("bad_example_2",
         .remove()
     ,
     newText("スペースキーを押して次に進んでください。")
-        .css({"position":"absolute", "top":"35%"})
-        .print()
+        .print("center at 50vw", "middle at 40vh")
     ,
     newKey(" ")
         .wait()
@@ -324,12 +373,12 @@ newTrial("bad_example_2",
 
 newTrial("bad_example_3",
     newText("example","悪い例3 - 途中で言い直している")
-        .css({"font-size":"20","border": "solid 1px black","position":"absolute", "left":"30%","top":"20%"})
-        .print("left at 0em")
+        .css({"font-size":"20","border": "solid 1px black"})
+        .print("left at 10vw","top at 10vh")
     ,
     newText("cross","+")
-        .css({"font-size":"40","position":"absolute", "top":"40%"})
-        .print()
+        .css({"font-size":"40"})
+        .print("center at 50vw", "middle at 40vh")
     ,
     newTimer(800)
         .start()
@@ -339,8 +388,8 @@ newTrial("bad_example_3",
         .remove()
     ,
     newText("stimulus", "会社員が")
-        .css({"font-size":"40", "color":"black","position":"absolute", "top":"40%"})
-        .print()
+        .css({"font-size":"40", "color":"black"})
+        .print("center at 50vw", "middle at 40vh")
     ,
     newTimer(1600)
         .start()
@@ -368,8 +417,7 @@ newTrial("bad_example_3",
         .remove()
     ,
     newText("スペースキーを押して次に進んでください。")
-        .css({"position":"absolute", "top":"35%"})
-        .print()
+        .print("center at 50vw", "middle at 40vh")
     ,
     newKey(" ")
         .wait()
@@ -402,8 +450,8 @@ Template(
     , row =>
     newTrial("practice_long",
         newText("cross","+")
-            .css({"font-size":"40","position":"absolute", "top":"40%"})
-            .print()
+            .css({"font-size":"40"})
+            .print("center at 50vw", "middle at 40vh")
         ,
         newTimer(800)
             .start()
@@ -413,8 +461,8 @@ Template(
             .remove()
         ,
         newText("stimulus", row.context)
-            .css({"font-size":"40", "color":"black","position":"absolute", "top":"40%"})
-            .print()
+            .css({"font-size":"40", "color":"black"})
+            .print("center at 50vw", "middle at 40vh")
         ,
         newTimer(1600)
             .start()
@@ -437,8 +485,7 @@ Template(
             .wait()
         ,
         newText("スペースキーを押して次に進んでください。")
-            .css({"position":"absolute", "top":"35%"})
-            .print()
+            .print("center at 50vw", "middle at 40vh")
         ,
         newKey(" ")
             .wait()
@@ -462,8 +509,8 @@ Template(
     , row =>
     newTrial("exp_long",
         newText("cross","+")
-            .css({"font-size":"40","position":"absolute", "top":"40%"})
-            .print()
+            .css({"font-size":"40"})
+            .print("center at 50vw", "middle at 40vh")
         ,
         newTimer(800)
             .start()
@@ -473,8 +520,8 @@ Template(
             .remove()
         ,
         newText("stimulus", row.context)
-            .css({"font-size":"40", "color":"black","position":"absolute", "top":"40%"})
-            .print()
+            .css({"font-size":"40", "color":"black"})
+            .print("center at 50vw", "middle at 40vh")
         ,
         newMediaRecorder(row.filename+"_"+subject_id,"audio")
             .record()
@@ -504,8 +551,7 @@ Template(
 
         ,
         newText("スペースキーを押して次に進んでください。")
-            .css({"position":"absolute", "top":"35%"})
-            .print()
+            .print("center at 50vw", "middle at 40vh")
         ,
         newKey(" ")
             .wait()
@@ -544,12 +590,12 @@ Template(
     , eg =>
     newTrial("example_short",
         newText("example",eg.exampletext)
-            .css({"font-size":"20","border": "solid 1px black","position":"absolute", "left":"30%","top":"20%"})
-            .print("left at 0em")
+            .css({"font-size":"20","border": "solid 1px black"})
+            .print("left at 10vw","top at 10vh")
         ,
         newText("cross","+")
-            .css({"font-size":"40","position":"absolute", "top":"40%"})
-            .print()
+            .css({"font-size":"40"})
+            .print("center at 50vw", "middle at 40vh")
         ,
         newTimer(800)
             .start()
@@ -559,7 +605,7 @@ Template(
             .remove()
         ,
         newText("stimulus", eg.context)
-            .css({"font-size":"40", "color":"black","position":"absolute", "top":"40%"})
+            .css({"font-size":"40", "color":"black"})
             .css({"color":"red"})
             .print()
         ,
@@ -578,8 +624,7 @@ Template(
             .wait()
         ,
         newText("スペースキーを押して次に進んでください。")
-            .css({"position":"absolute", "top":"35%"})
-            .print()
+            .print("center at 50vw", "middle at 40vh")
         ,
         newKey(" ")
             .wait()
@@ -604,8 +649,8 @@ Template(
     , row =>
     newTrial("practice_short",
         newText("cross","+")
-            .css({"font-size":"40","position":"absolute", "top":"40%"})
-            .print()
+            .css({"font-size":"40"})
+            .print("center at 50vw", "middle at 40vh")
         ,
         newTimer(800)
             .start()
@@ -615,8 +660,8 @@ Template(
             .remove()
         ,
         newText("stimulus", row.context)
-            .css({"font-size":"40", "color":"red","position":"absolute", "top":"40%"})
-            .print()
+            .css({"font-size":"40", "color":"red"})
+            .print("center at 50vw", "middle at 40vh")
         ,
         newTimer(1200)
             .start()
@@ -630,8 +675,7 @@ Template(
             .wait()
         ,
         newText("スペースキーを押して次に進んでください。")
-            .css({"position":"absolute", "top":"35%"})
-            .print()
+            .print("center at 50vw", "middle at 40vh")
         ,
         newKey(" ")
             .wait()
@@ -659,8 +703,8 @@ Template(
     , row =>
     newTrial("exp_short",
         newText("cross","+")
-            .css({"font-size":"40","position":"absolute", "top":"40%"})
-            .print()
+            .css({"font-size":"40"})
+            .print("center at 50vw", "middle at 40vh")
         ,
         newTimer(800)
             .start()
@@ -670,8 +714,8 @@ Template(
             .remove()
         ,
         newText("stimulus", row.context)
-            .css({"font-size":"40", "color":"red","position":"absolute", "top":"40%"})
-            .print()
+            .css({"font-size":"40", "color":"red"})
+            .print("center at 50vw", "middle at 40vh")
         ,
         newMediaRecorder(row.filename+"_"+subject_id,"audio")
             .record()
@@ -691,8 +735,7 @@ Template(
             .stop()
         ,
         newText("スペースキーを押して次に進んでください。")
-            .css({"position":"absolute", "top":"35%"})
-            .print()
+            .print("center at 50vw", "middle at 40vh")
         ,
         newKey(" ")
             .wait()
