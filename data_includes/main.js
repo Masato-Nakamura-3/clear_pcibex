@@ -318,7 +318,7 @@ newTrial("introduction_long_2",
 
 //
 newTrial("bad_example_2",
-    newText("example","悪い例2 - 回答以外の音声を発している")
+    newText("example","悪い例3 - 回答以外の音声を発している")
         .css({"font-size":"20","border": "solid 1px black"})
         .print("left at 10vw","top at 10vh")
     ,
@@ -372,7 +372,7 @@ newTrial("bad_example_2",
 //
 
 newTrial("bad_example_3",
-    newText("example","悪い例3 - 途中で言い直している")
+    newText("example","悪い例4 - 途中で言い直している")
         .css({"font-size":"20","border": "solid 1px black"})
         .print("left at 10vw","top at 10vh")
     ,
