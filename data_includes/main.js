@@ -641,6 +641,9 @@ Template(
 
 
 newTrial( "practice_short_exit",
+    newHtml("short_exit.html")
+        .print()
+    ,
     newText("以上で練習は終わりです。スペースキーを押すと実験の後半が始まりますので、準備ができたら始めてください。<br><br>")
         .print()
     ,
