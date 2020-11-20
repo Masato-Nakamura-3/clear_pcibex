@@ -605,9 +605,8 @@ Template(
             .remove()
         ,
         newText("stimulus", eg.context)
-            .css({"font-size":"40", "color":"black"})
-            .css({"color":"red"})
-            .print()
+            .css({"font-size":"40", "color":"red"})
+            .print("center at 50vw", "middle at 40vh")
         ,
         newAudio("sample",eg.audiofile)
             .play()
